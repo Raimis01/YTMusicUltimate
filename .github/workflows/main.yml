@@ -68,16 +68,13 @@ jobs:
 
         if: steps.SDK.outputs.cache-hit != 'true'
         run: |
-          git clone -n --depth=1 --fil
-          ter=tree:0 https://github.com/theos/
-          sdks/
+          git clone --quiet -n --depth=1 --filter=tree:0 https://github.com/theos/sdks/
           cd sdks
-          git sparse-checkout set --no-cone i
-          Phone0S16.5.sdk
+          git sparse-checkout set --no-cone iPhoneOS16.5.sdk
           git checkout
           mv *.sdk $THEOS/sdks
         env:
-          THEOS: ${{ github.workspace }}/
+          THEOS: ${{ github.workspace }}/theos
 
       - name: Setup Theos Jailed
         uses: actions/checkout@v4.1.1
